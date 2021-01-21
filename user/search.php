@@ -1,12 +1,10 @@
 <?php
 include('header.php');
 include('navbar.php');
+title('Search');
 include('acc.php');
 ?>
 <!-- modal -->
-<!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profileModal">
-  <i class="fas fa-sign-out-alt fa-mx fa-fw mr-1 text-gray-800"></i>
-</a> -->
 <?php 
 if (!isset($_GET['GO!'])) 
 {
@@ -14,8 +12,7 @@ if (!isset($_GET['GO!']))
 }
 $q=$_GET['q'];
 $sn=$_SESSION['bid'];
-$query="SELECT * FROM b_person Where Name LIKE '%$q%' AND bid != '$sn' "; 
-$result =mysqli_query($connection,$query);
+$result=select("*","b_person","WHERE Name LIKE '%$q%' AND bid != '$sn' ");
 while($row = mysqli_fetch_assoc($result)) 
 { 
   $mid=$row['bid'];
@@ -36,6 +33,7 @@ while($row = mysqli_fetch_assoc($result))
             <div class="card-header" style="background-image: url('../admin/image/wall0.jpg')">
               <div class="profile-picture1">
                 <?php 
+                $status="";
                 if ($row['status']=='on') 
                 {
                   $status="avatar-online";
@@ -44,10 +42,23 @@ while($row = mysqli_fetch_assoc($result))
                 {
                   $status="avatar-offline";
                 }
+                if (empty($row['image'])) 
+                {
+                  $words = explode(" ", strtoupper($row['Name']));
+                  $acronym = "";
+                  foreach ($words as $w) {
+                    $acronym .= $w[0];
+                  }
+                  echo "<div class='avatar avatar-lg ".$status."'>
+                  <span class='avatar-title rounded-circle border border-white '>".$acronym."</span>               
+                  </div>";
+                }
+                else{
+                  echo "<div class='avatar avatar-lg ".$status."'>
+                  <img  class='avatar-img rounded-circle' src='../admin/image/".$row['image']."'> 
+                  </div>";
+                }               
                 ?>
-                <div class="avatar avatar-xl <?php echo $status; ?>">
-                  <?php  echo "<img  class='avatar-img rounded-circle' src='../admin/image/".$row['image']."'> ";?>
-                </div>
               </div>
             </div>
             <div class="card-body1">
@@ -67,8 +78,7 @@ while($row = mysqli_fetch_assoc($result))
                 </div>
                 <div class="col">
                   <?php 
-                  $queryy="SELECT * FROM subject WHERE id=$mid ";
-                  $sql_runn=mysqli_query($connection,$queryy);
+                  $sql_runn=select("*","subject","WHERE id=$mid");
                   $subj=mysqli_num_rows($sql_runn);
                   ?>
                   <div class="number"><?php echo $subj;?></div>
@@ -76,8 +86,7 @@ while($row = mysqli_fetch_assoc($result))
                 </div>
                 <div class="col">
                   <?php 
-                  $queryy="SELECT * FROM connxtion WHERE ntid=$mid ";
-                  $sql_runn=mysqli_query($connection,$queryy);
+                  $sql_runn=select("*","connxtion","WHERE ntid=$mid");
                   $x=$y=0;
                   foreach($sql_runn as $row ) 
                   {
@@ -97,8 +106,8 @@ while($row = mysqli_fetch_assoc($result))
           </div>
         </div>
       </div>
+    </div>
   </div>
-</div>
 <?php } ?>
 <!-- modal end -->
 <script type="text/javascript">
@@ -124,7 +133,7 @@ while($row = mysqli_fetch_assoc($result))
 <div class="page-inner" style="padding-top: 0px;" >  
   <!-- searchbbox -->
   <div class="row ">    
-    <div class="col-sm-12 col-md-6">
+    <div class="col-md-12 ml-auto mr-auto">
       <form action="search.php" method="GET" id="sf">
         <div class="form-group">
           <div class="input-group mb-3">
@@ -142,11 +151,8 @@ while($row = mysqli_fetch_assoc($result))
    <!-- searchbbox end-->
    <!-- result starts -->
    <div class="row">
-    <div class="col-md-6">
-      <div class="card card-round">
-        <div class="card-body">
-          <div class="card-title fw-mediumbold">Results</div>
-          <div class="card-list">
+    <div class="col-md-6 ml-auto mr-auto">
+      <div class="card card-round">        
             <?php 
             if ($_GET['q'] == 'Search...') 
             {
@@ -156,21 +162,24 @@ while($row = mysqli_fetch_assoc($result))
            {            
             if (!isset($_GET['q'])) 
             {
-             echo " ";
-           }
+             echo " ";}
            else
-           {         
+           {       
+           echo "<div class='card-body'>
+          <div class='card-title fw-mediumbold'>Results</div>
+          <div class='card-list'>";  
             $q=$_GET['q'];
             $sn=$_SESSION['bid'];
-            $query="SELECT * FROM b_person Where bid != '$sn' AND (Name LIKE '%$q%' OR category LIKE '%$q%' OR cs LIKE '%$q%')";  
-            $result =mysqli_query($connection,$query);
+            $result=select("*","b_person","Where bid != '$sn' AND (Name LIKE '%$q%' OR category LIKE '%$q%' OR cs LIKE '%$q%')");
             $reow=mysqli_num_rows($result);
             echo '<div>'.$reow.' results For "'.$q.'"</div>';
             while($row = mysqli_fetch_assoc($result)) 
             {
-              $mid=$row['bid'];?>              
+              $mid=$row['bid'];
+              ?>              
               <div class="item-list">
                 <?php 
+                $status="";
                 if ($row['status']=='on') 
                 {
                   $status="avatar-online";
@@ -179,10 +188,23 @@ while($row = mysqli_fetch_assoc($result))
                 {
                   $status="avatar-offline";
                 }
+                if (empty($row['image'])) 
+                {
+                  $words = explode(" ", strtoupper($row['Name']));
+                  $acronym = "";
+                  foreach ($words as $w) {
+                    $acronym .= $w[0];
+                  }
+                  echo "<div class='avatar ".$status."'>
+                  <span class='avatar-title rounded-circle border border-white '>".$acronym."</span>               
+                  </div>";
+                }
+                else{
+                  echo "<div class='avatar ".$status."'>
+                  <img  class='avatar-img rounded-circle' src='../admin/image/".$row['image']."'> 
+                  </div>";
+                }                
                 ?>
-                <div class="avatar <?php echo $status; ?>">
-                  <?php  echo "<img  class='avatar-img rounded-circle ' src='../admin/image/".$row['image']."'> ";?>
-                </div>
                 <div class="info-user ml-3">
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#<?php echo $mid;?>">
                     <div class="username" style="font-size: 15px;">
@@ -197,15 +219,15 @@ while($row = mysqli_fetch_assoc($result))
               {
                 ?> 
                 <button class='btn btn-icon btn-round btn-xs' title="Friends">
-                <i class='fas fa-user-friends text-success'></i>
+                  <i class='fas fa-user-friends text-success'></i>
                 </button>&emsp;
                 <form action='req.php' method='POST'>                 
-                <input type='hidden' name='q' value='<?php echo $q;?>'/> 
-                <input type='hidden' name='acptrid' value='<?php echo $mid;?>'>
-                <input type='hidden' name='sendrid' value='<?php echo $sn;?>'>    
-                <button class='btn btn-icon btn-round btn-xs' type='submit' name='unf' title="UnFriend User">
-                <i class='fas fa-user-minus text-danger'></i>
-                </button>
+                  <input type='hidden' name='q' value='<?php echo $q;?>'/> 
+                  <input type='hidden' name='acptrid' value='<?php echo $mid;?>'>
+                  <input type='hidden' name='sendrid' value='<?php echo $sn;?>'>    
+                  <button class='btn btn-icon btn-round btn-xs' type='submit' name='unf' title="UnFriend User">
+                    <i class='fas fa-user-minus text-danger'></i>
+                  </button>
                 </form>      
                 <?php
               }
@@ -213,33 +235,33 @@ while($row = mysqli_fetch_assoc($result))
               {
                 ?>
                 <form action='req.php' method='POST'>                 
-                <input type='hidden' name='q' value='<?php echo $q;?>'/> 
-                <input type='hidden' name='acptrid' value='<?php echo $mid;?>'>
-                <input type='hidden' name='sendrid' value='<?php echo $sn;?>'>      
-                <button class='btn btn-icon btn-round btn-xs' type='submit' name='can' title="Requested">
-                <i class='fas fa-user-plus text-success'></i>
-                </button>
+                  <input type='hidden' name='q' value='<?php echo $q;?>'/> 
+                  <input type='hidden' name='acptrid' value='<?php echo $mid;?>'>
+                  <input type='hidden' name='sendrid' value='<?php echo $sn;?>'>      
+                  <button class='btn btn-icon btn-round btn-xs' type='submit' name='can' title="Requested">
+                    <i class='fas fa-user-plus text-success'></i>
+                  </button>
                 </form>      
                 <?php
               }
               elseif (is_req_came($sn,$mid)) 
               {
                ?> 
-                <form action='req.php' method='POST'>                 
+               <form action='req.php' method='POST'>                 
                 <input type='hidden' name='q' value='<?php echo $q;?>'/> 
                 <input type='hidden' name='acptrid' value='<?php echo $mid;?>'>
                 <input type='hidden' name='sendrid' value='<?php echo $sn;?>'>     
                 <button class='btn btn-icon btn-round btn-xs' type='submit' name='accpt' title="Accept Request">
-                <i class='fas fa-user-plus text-info'></i>
+                  <i class='fas fa-user-plus text-info'></i>
                 </button>
                 <button class='btn btn-icon btn-round btn-xs' type='submit' name='rej' title="Reject Request">
-                <i class='fas fa-user-times text-danger'></i>
+                  <i class='fas fa-user-times text-danger'></i>
                 </button>
-                </form>     
-                <?php                 
-              }
-              else
-              {
+              </form>     
+              <?php                 
+            }
+            else
+            {
               ?>
               <form action='req.php' method='POST'>                 
                 <input type='hidden' name='q' value='<?php echo $q;?>'/> 
@@ -250,13 +272,12 @@ while($row = mysqli_fetch_assoc($result))
                 </button>
               </form>    
             <?php } ?>
-            </div>      
-          <?php } 
-        }
+          </div>      
+        <?php  } 
+        echo "</div></div>";
       }
-      ?>       
-    </div>
-  </div>
+    }
+    ?>
 </div>
 </div>
 </div> 

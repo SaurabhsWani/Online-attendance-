@@ -1,19 +1,17 @@
 <?php
 include('header.php');
 include('navbar.php');
+title('Home');
 ?>
-
 <div class="page-inner">
 	<!-- TimeLine -->
 	<div class="row">   
 		<div class="col-md-12">
 			<div class="card bg-primary-gradient">
-				<div class="card-header bubble-shadow">
+				<div class="card-header bubble-shadow">					
 					<h4 class="card-title"style="color: white">Home<marquee>
 						<?php 
-						$query="SELECT * FROM nupd";
-						$sql=mysqli_query($connection,$query);
-
+						$sql=select("*","nupd","");
 						if (mysqli_num_rows($sql)>0) 
 						{
 							while ($row=mysqli_fetch_assoc($sql)) 
@@ -32,30 +30,6 @@ include('navbar.php');
 			</div>
 		</div>
 	</div>
-	<?php
-	if (isset($_SESSION['Success'])&&$_SESSION['Success']!='') {
-		echo '
-		<div class="col-md-12">
-		<div class="card card-success">
-		<div class="card-header">
-		<h4 class="card-title">'.$_SESSION['Success'].'</h4>
-		</div>
-		</div>
-		</div>';
-		unset($_SESSION['Success']);
-	}
-	if (isset($_SESSION['Status'])&&$_SESSION['Status']!='') {
-		echo '
-		<div class="col-md-12">
-		<div class="card card-danger">
-		<div class="card-header">
-		<h4 class="card-title">'.$_SESSION['Status'].'</h4>
-		</div>
-		</div>
-		</div>';
-		unset($_SESSION['Status']);
-	}
-	?>
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">

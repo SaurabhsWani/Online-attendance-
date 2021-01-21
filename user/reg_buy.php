@@ -4,25 +4,25 @@ include('header.php');
 
 <div class="page-inner mt--5">
 
-	<div class="container">
+  <div class="container">
     <style type="text/css">
       .wave{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-}
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+      }
     </style>
     <img class="wave" src="../admin/image/lr.png" alt="Online attendance"/>
-		<div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-			<div class="col-xl-6 col-lg-6 col-md-6">
+     <div class="col-xl-6 col-lg-6 col-md-6">
 
-				<div class="card o-hidden border-0 shadow-lg my-5 " style="border-bottom-right-radius:40px;
-       border-bottom-left-radius:40px;">
-       <div class="card-body p-1">
+      <div class="card o-hidden border-0 shadow-lg my-5 " style="border-bottom-right-radius:40px;
+      border-bottom-left-radius:40px;">
+      <div class="card-body p-1">
 
         <!-- Nested Row within Card Body -->
         <div class="row">
@@ -58,10 +58,10 @@ include('header.php');
                 <label for="CS">College/School Name:</label>
                 <input  type="text" class="form-control" placeholder="Enter College/School" name="CS" id="CS" required="">
               </div>
-              <div class="form-group">
+             <!--  <div class="form-group">
                 <label>Upload Profile Photo</label>
                 <input type="file" name="adimg" id="adimg" class="form-control"  required="">
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="password">Password:</label>
                 <div class="input-group">
@@ -84,14 +84,14 @@ include('header.php');
               </div>
             </div>
           </div>
-              <div class="form-group">
-                <label>Select Plan</label>
-                <select class="form-control" id="formGroupDefaultSelect" name="pln" required="">
-                  <option value="Free">Free</option>
-                  <option value="0.4">$0.4/Month</option>
-                  <option value="4">$4/Year</option>
-                </select>
-              </div>
+          <div class="form-group">
+            <label>Select Plan</label>
+            <select class="form-control" id="formGroupDefaultSelect" name="pln" required="">
+              <option value="Free">Free</option>
+              <option value="0.4">$0.4/Month</option>
+              <option value="4">$4/Year</option>
+            </select>
+          </div>
           <br><button type="submit" name="submit" value="submit" class="btn btn-primary  btn-user btn-block ">
            <span class="btn-label">
             <i class="fa fa-check"></i>
@@ -110,17 +110,14 @@ include('header.php');
 </div>
 </div>
 </div>
-
 </div>
-
 </div>
-
-
 </div> 
 <?php
 include('footer.php');
 include('script.php');
-?><script>
+?>
+<script>
   function myFunction() {
     var x = document.getElementById("myInput");
     if (x.type === "password") {

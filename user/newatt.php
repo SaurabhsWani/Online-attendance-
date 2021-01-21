@@ -1,6 +1,7 @@
 <?php
 include('header.php');
 include('navbar.php');
+title('New Attendance');
 $col=$_SESSION['sub'];
 if($_SESSION['sub']!=NULL)
 {
@@ -13,9 +14,8 @@ if($_SESSION['sub']!=NULL)
 				<div class="card " style="border-bottom-left-radius:70px;border-top-right-radius:70px;">
 				<div class="card-header">
 					<div class="card-title">
-						<?php 					
-						$query="SELECT prn FROM $col ";
-						$sql_run=mysqli_query($connection,$query);
+						<?php 
+						$sql_run=select("prn",$col,"");
 						$row=mysqli_num_rows($sql_run);
 						echo $_SESSION['sub'].'&emsp;&emsp;Total Students: '.$row.'';
 						$_SESSION['cont']=$row;

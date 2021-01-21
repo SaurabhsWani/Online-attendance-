@@ -1,9 +1,10 @@
 <?php
 include('security.php');
+include('fun.php');
 if(isset($_POST['submit']))
 { 
 	$col=$_POST['subj'];
-	echo "<script>alert(".$col.");</script>";
+	echo "<script>alert('".$col."');</script>";
 }
 if ($connection)
 {
@@ -11,7 +12,6 @@ if ($connection)
 }
 
 //new col
-$sql = "SELECT * FROM $col WHERE 1";
 $c=date("Y/m/d--").date("h:i:sa");
 $_SESSION['col']=$c;
 $x="ALTER TABLE `$col` ADD `$c` VARCHAR (255)";
@@ -25,8 +25,7 @@ while ($row=mysqli_fetch_array($res))
 {
 	$ncol+=1;
 }
-$query="SELECT prn FROM $col ";
-$sql_run=mysqli_query($connection,$query);
+$sql_run=select("prn",$col,"");
 $row=mysqli_num_rows($sql_run);
 $sql = "INSERT INTO $col (`$c`) VALUES ('null')";
 $u=0;
@@ -42,9 +41,7 @@ for ($i=1; $i <=$row; $i++)
 	mysqli_query($connection,$sql); 
 }
 echo "<script>alert('Toltal Present Students Are ".$u."');</script>";
-
-$query2="SELECT percnt FROM $col";
-$sql2=mysqli_query($connection,$query2);
+$sql2=select("percnt",$col,"");
 $i=1;
 while ($row2=mysqli_fetch_assoc($sql2)) 
 {  	
@@ -69,7 +66,6 @@ while ($row2=mysqli_fetch_assoc($sql2))
 	$i++;
 }
 
-mysqli_close($connection);
+mysqli_close($connection); 
 echo '<script>window.location="Class.php"</script>'; 
-// header('Location:view.php');
 ?>

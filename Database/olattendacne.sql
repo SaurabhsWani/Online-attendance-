@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2020 at 01:47 PM
+-- Generation Time: Jan 21, 2021 at 10:39 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -70,9 +70,15 @@ CREATE TABLE `b_person` (
 
 INSERT INTO `b_person` (`bid`, `code`, `category`, `Name`, `Email`, `Password`, `image`, `Plan`, `cs`, `Date`, `status`) VALUES
 (0, '00', '', '', '', '', 'avatar.png', '', '', '0000-00-00', ''),
-(11, 'KqSJaCA', 'Principal', 'saurabh', 'saurabh123@gmail.com', 'asdf', 'avatar.png', 'Free', 'gcoej', '2020-09-14', 'off'),
-(13, 'Qptefa8', 'Principal', 'Radhikaa', 'er.saurabhwani1@gmail.com', 'asdf', 'avatar5.png', 'Free', 'gcoej', '2020-09-14', 'off'),
-(14, 'RxuDrpH', 'HOD', 'Tushar Patil', 'tusharpatil12@gmail.com', 'asdf', 'user.jpg', 'Free', 'SMIT', '2020-09-22', 'on');
+(11, 'KqSJaCA', 'Principal', 'saurabh wani', 'saurabh123@gmail.com', 'asdf', '', 'Free', 'gcoej', '2020-09-14', 'off'),
+(14, 'RxuDrpH', 'HOD', 'Tushar Patil', 'tusharpatil12@gmail.com', 'asdf', 'user.jpg', 'Free', 'SMIT', '2020-09-22', 'off'),
+(15, 'lichEEO', 'HOD', 'Raj Sharm', 'raj123@gmail.com', 'asdf', 'teacher-Online-Attendance.png', 'Free', 'COEP', '2020-09-23', 'off'),
+(20, 'CmtAXvr', 'Principal', 'rakesh', 'rakesh@gmail.com', 'asdf', 'IMG-20191209-WA0006.jpg', 'Free', 'COEP', '2020-11-12', 'off'),
+(22, 'xvA7c9i', 'Principal', 'Saurabh wani', 'saurabh1234@gmail.com', 'asdf', 'avatar5.png', 'Free', 'SMIT', '2020-11-21', 'off'),
+(23, 'YpBeAsv', 'Principal', 'Rohit sharma', 'saurabh14@gmail.com', 'asdf', '', 'Free', 'new2', '2020-11-21', 'off'),
+(26, 'gncDI0b', 'Principal', 'Shyam Sulbhwar', 'shyam1@gmail.com', 'asdf', '', 'Free', 'VJTI', '2020-12-23', 'off'),
+(27, 'cRz6RS3', 'Class Teacher', 'Rakesh Roshan', 'Rr@gmail.com', 'asdf', '', 'Free', 'GCOEJ', '2021-01-21', 'on'),
+(28, 'MCrZdHA', 'Class Teacher', 'Rohit Patil', 'rp@gmail.com', 'asdf', 'ur.png', 'Free', 'GCOEJ', '2021-01-21', 'off');
 
 -- --------------------------------------------------------
 
@@ -93,9 +99,56 @@ INSERT INTO `connxtion` (`ntid`, `tid`) VALUES
 (8, 'a:0:{}'),
 (9, 'a:0:{}'),
 (10, 'a:0:{}'),
-(11, 'a:1:{i:0;s:2:\"13\";}'),
-(13, 'a:1:{i:0;s:2:\"11\";}'),
-(14, 'a:0:{}');
+(11, 'a:2:{i:0;s:2:\"13\";i:1;s:2:\"28\";}'),
+(13, 'a:2:{i:0;s:2:\"11\";i:1;s:2:\"15\";}'),
+(14, 'a:0:{}'),
+(15, 'a:2:{i:0;s:2:\"20\";i:1;s:2:\"13\";}'),
+(14, 'a:0:{}'),
+(20, 'a:1:{i:0;s:2:\"15\";}'),
+(21, 'a:0:{}'),
+(22, 'a:0:{}'),
+(23, 'a:0:{}'),
+(26, 'a:0:{}'),
+(27, 'a:0:{}'),
+(28, 'a:1:{i:0;s:2:\"11\";}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbms28`
+--
+
+CREATE TABLE `dbms28` (
+  `id` int(11) NOT NULL,
+  `prn` int(11) DEFAULT NULL,
+  `percnt` int(11) DEFAULT NULL,
+  `2021/01/21--10:17:43am` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dbms28`
+--
+
+INSERT INTO `dbms28` (`id`, `prn`, `percnt`, `2021/01/21--10:17:43am`) VALUES
+(1, 1, 100, 'present'),
+(2, 2, 100, 'present'),
+(3, 3, 100, 'present'),
+(4, 4, 100, 'present'),
+(5, 5, 100, 'present'),
+(6, 6, 0, 'Absent'),
+(7, 7, 100, 'present'),
+(8, 8, 100, 'present'),
+(9, 9, 0, 'Absent'),
+(10, 10, 100, 'present'),
+(11, 102, 100, 'present'),
+(12, 103, 100, 'present'),
+(13, 104, 100, 'present'),
+(14, 105, 100, 'present'),
+(15, 106, 100, 'present'),
+(16, 107, 100, 'present'),
+(17, 108, 0, 'Absent'),
+(18, 109, 100, 'present'),
+(19, 110, 100, 'present');
 
 -- --------------------------------------------------------
 
@@ -116,84 +169,6 @@ CREATE TABLE `distributer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `math11`
---
-
-CREATE TABLE `math11` (
-  `id` int(11) NOT NULL,
-  `prn` int(11) DEFAULT NULL,
-  `percnt` int(11) DEFAULT NULL,
-  `2020/09/15--03:53:00pm` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `math11`
---
-
-INSERT INTO `math11` (`id`, `prn`, `percnt`, `2020/09/15--03:53:00pm`) VALUES
-(1, 1, 100, 'present'),
-(2, 2, 100, 'present'),
-(3, 3, 100, 'present'),
-(4, 4, 100, 'present'),
-(5, 5, 100, 'present'),
-(6, 6, 100, 'present'),
-(7, 7, 100, 'present'),
-(8, 8, 100, 'present'),
-(9, 9, 100, 'present'),
-(10, 10, 100, 'present'),
-(11, 11, 100, 'present'),
-(12, 12, 100, 'present'),
-(13, 13, 100, 'present'),
-(14, 14, 100, 'present'),
-(15, 15, 100, 'present'),
-(16, 16, 100, 'present'),
-(17, 17, 100, 'present'),
-(18, 18, 100, 'present'),
-(19, 19, 100, 'present'),
-(20, 20, 100, 'present');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `math14`
---
-
-CREATE TABLE `math14` (
-  `id` int(11) NOT NULL,
-  `prn` int(11) DEFAULT NULL,
-  `percnt` int(11) DEFAULT NULL,
-  `2020/09/22--01:47:04pm` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `math14`
---
-
-INSERT INTO `math14` (`id`, `prn`, `percnt`, `2020/09/22--01:47:04pm`) VALUES
-(1, 1, 100, 'present'),
-(2, 2, 100, 'present'),
-(3, 3, 100, 'present'),
-(4, 4, 100, 'present'),
-(5, 5, 100, 'present'),
-(6, 6, 100, 'present'),
-(7, 7, 100, 'present'),
-(8, 8, 100, 'present'),
-(9, 9, 100, 'present'),
-(10, 10, 100, 'present'),
-(11, 11, 100, 'present'),
-(12, 12, 100, 'present'),
-(13, 13, 100, 'present'),
-(14, 14, 100, 'present'),
-(15, 15, 100, 'present'),
-(16, 16, 100, 'present'),
-(17, 17, 100, 'present'),
-(18, 18, 100, 'present'),
-(19, 19, 100, 'present'),
-(20, 20, 100, 'present');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `nupd`
 --
 
@@ -201,6 +176,13 @@ CREATE TABLE `nupd` (
   `id` int(100) NOT NULL,
   `l1` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nupd`
+--
+
+INSERT INTO `nupd` (`id`, `l1`) VALUES
+(1, 'Hello for testing');
 
 -- --------------------------------------------------------
 
@@ -222,8 +204,20 @@ INSERT INTO `recieve` (`bid`, `rec`) VALUES
 (9, '0'),
 (10, '0'),
 (11, 'a:0:{}'),
-(13, 'a:0:{}'),
-(14, 'a:0:{}');
+(13, 'a:1:{i:0;s:2:\"20\";}'),
+(14, 'a:2:{i:0;s:2:\"20\";i:1;s:2:\"28\";}'),
+(15, 'a:1:{i:0;s:2:\"11\";}'),
+(14, 'a:2:{i:0;s:2:\"20\";i:1;s:2:\"28\";}'),
+(17, 'a:1:{i:0;s:2:\"13\";}'),
+(18, 'a:0:{}'),
+(19, 'a:0:{}'),
+(20, 'a:1:{i:0;s:2:\"11\";}'),
+(21, 'a:0:{}'),
+(22, 'a:1:{i:0;s:2:\"28\";}'),
+(23, 'a:0:{}'),
+(26, 'a:0:{}'),
+(27, 'a:1:{i:0;s:2:\"28\";}'),
+(28, 'a:0:{}');
 
 -- --------------------------------------------------------
 
@@ -247,7 +241,9 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`id`, `review`, `rate`, `status`, `DATE`, `display`, `email`, `name`) VALUES
-(0, 'Saurabh', 5, 'unread', '2020-09-14 15:50:16', 'yes', 'sau@gmail.com', 'asdf');
+(0, 'Saurabh', 5, 'unread', '2020-09-14 15:50:16', 'yes', 'sau@gmail.com', 'asdf'),
+(11, 'dsfasfa', 5, 'unread', '2020-11-15 15:16:13', 'no', '', ''),
+(11, 'dsfasfa', 5, 'unread', '2020-11-15 15:16:31', 'no', '', '');
 
 -- --------------------------------------------------------
 
@@ -268,9 +264,21 @@ INSERT INTO `sent` (`bid`, `send`) VALUES
 (8, '0'),
 (9, '0'),
 (10, '0'),
-(11, 'a:0:{}'),
-(13, 'a:0:{}'),
-(14, 'a:0:{}');
+(11, 'a:3:{i:0;s:2:\"16\";i:1;s:2:\"15\";i:2;s:2:\"20\";}'),
+(13, 'a:1:{i:0;s:2:\"17\";}'),
+(14, 'a:0:{}'),
+(15, 'a:0:{}'),
+(14, 'a:0:{}'),
+(17, 'a:0:{}'),
+(18, 'a:0:{}'),
+(19, 'a:0:{}'),
+(20, 'a:2:{i:0;s:2:\"13\";i:1;s:2:\"14\";}'),
+(21, 'a:0:{}'),
+(22, 'a:0:{}'),
+(23, 'a:0:{}'),
+(26, 'a:0:{}'),
+(27, 'a:0:{}'),
+(28, 'a:3:{i:0;s:2:\"22\";i:1;s:2:\"14\";i:2;s:2:\"27\";}');
 
 -- --------------------------------------------------------
 
@@ -291,8 +299,7 @@ CREATE TABLE `subject` (
 --
 
 INSERT INTO `subject` (`id`, `subjname`, `sid`, `standard`, `divsion`) VALUES
-(11, 'math11', 4, '12', 'm'),
-(14, 'math14', 5, '12', 'm');
+(28, 'DBMS28', 16, 'T.Y.Comp', 'T2');
 
 --
 -- Indexes for dumped tables
@@ -311,21 +318,15 @@ ALTER TABLE `b_person`
   ADD PRIMARY KEY (`bid`);
 
 --
+-- Indexes for table `dbms28`
+--
+ALTER TABLE `dbms28`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `distributer`
 --
 ALTER TABLE `distributer`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `math11`
---
-ALTER TABLE `math11`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `math14`
---
-ALTER TABLE `math14`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -354,7 +355,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `b_person`
 --
 ALTER TABLE `b_person`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `dbms28`
+--
+ALTER TABLE `dbms28`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `distributer`
@@ -363,22 +370,16 @@ ALTER TABLE `distributer`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `math11`
+-- AUTO_INCREMENT for table `nupd`
 --
-ALTER TABLE `math11`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `math14`
---
-ALTER TABLE `math14`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `nupd`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

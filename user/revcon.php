@@ -1,11 +1,11 @@
 <?php
 include('security.php');
+include('fun.php');
 if(isset($_POST['btn'])) 
 {
 	if(empty($_POST['rev']) || $_POST['rate']==null)
 	{
-		$_SESSION['Success']="Please Fill All the fields ";
-		header('Location: review.php');
+		poutput("Please Fill All the fields","review");
 	} 
 	else
 	{
@@ -13,14 +13,12 @@ if(isset($_POST['btn']))
 
 		if(mysqli_query($connection,$sql))
 		{
-			$_SESSION['Success']="Your review Submitted ";
-			header("Location:review.php");
+			poutput("Your review Submitted","review");
 
 		}
 		else
 		{
-			$_SESSION['Status']="Your review Not Submitted ";
-			header('Location: review.php');
+			noutput("Your review Not Submitted","review");
 		}
 	}
 }
@@ -28,8 +26,7 @@ if(isset($_POST['btnu']))
 {
 	if(empty($_POST['rev']) || $_POST['rate']==null)
 	{
-		$_SESSION['Success']="Please Fill All the fields ";
-		header('Location:../Atten/about.php');
+		poutput("Please Fill All the fields","../Atten/about");
 	} 
 	else
 	{
@@ -37,14 +34,12 @@ if(isset($_POST['btnu']))
 
 		if(mysqli_query($connection,$sql))
 		{
-			$_SESSION['Success']="Your review Submitted ";
-			header("Location:../Atten/about.php");
+			poutput("Your review Submitted","../Atten/about");
 
 		}
 		else
 		{
-			$_SESSION['Status']="Your review Not Submitted ";
-			header('Location:../Atten/about.php');
+			poutput("Your review Not Submitted","../Atten/about");
 		}
 	}
 }

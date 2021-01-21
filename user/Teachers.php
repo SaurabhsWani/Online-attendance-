@@ -1,43 +1,21 @@
 <?php
 include('header.php');
 include('navbar.php');
+title("Friend's Subject");
 unset($_SESSION['sub']);
 unset($_SESSION['subcode']);
 ?>
 <div class="page-inner ">
+  <?php
+  message();
+  ?>
   <div class="row ">   
     <div class="col-md-12">
-      <?php
-      if (isset($_SESSION['Success'])&&$_SESSION['Success']!='') {
-        echo '
-        <div class="col-md-12">
-        <div class="card">
-        <div class="card-header">
-        <h4 class="card-title">'.$_SESSION['Success'].'</h4>
-        </div>
-        </div>
-        </div>';
-        unset($_SESSION['Success']);
-      }
-      if (isset($_SESSION['Status'])&&$_SESSION['Status']!='') {
-        echo '
-        <div class="col-md-12">
-        <div class="card">
-        <div class="card-header">
-        <h4 class="card-title">'.$_SESSION['Status'].'</h4>
-        </div>
-        </div>
-        </div>';
-        unset($_SESSION['Status']);
-      }
-      ?>
-
       <div class="card">
         <div class="card-header">                  
           <?php 
           $bd=$_SESSION['bid'];
-          $query="SELECT * FROM b_person WHERE bid=$bd";
-          $sql=mysqli_query($connection,$query);
+          $sql=select("*","b_person","WHERE bid=$bd");
           foreach($sql as $row ) 
             {?>
               <h4 class="card-title">Teachers &emsp;("<?php echo $row['code']; ?>")</h4>
@@ -46,8 +24,7 @@ unset($_SESSION['subcode']);
           <div class="card-body">
             <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
              <?php 
-             $query="SELECT * FROM connxtion WHERE ntid=$bd";
-             $sql=mysqli_query($connection,$query);
+             $sql=select("*","connxtion","WHERE ntid=$bd");
              foreach($sql as $row ) 
              {
               $x=$row['tid'];
@@ -74,8 +51,7 @@ unset($_SESSION['subcode']);
                 $t="false";
               }
               $hm=$b[$i];
-              $query="SELECT * FROM b_person WHERE bid=$hm";
-              $sqll=mysqli_query($connection,$query);
+              $sqll=select("*","b_person","WHERE bid=$hm");
               foreach($sqll as $rowm ) 
               {
                 ?>
@@ -104,8 +80,7 @@ unset($_SESSION['subcode']);
                 $o="";
               }
               $k=$b[$z];
-              $sql = "SELECT * FROM subject WHERE id=$k";
-              $result =mysqli_query($connection,$sql);
+              $result=select("*","subject","WHERE id=$k");
               ?>
               <div class="tab-pane fade <?php echo $o;?>" id="pills-<?php echo $h;?>" role="tabpanel" aria-labelledby="pills-<?php echo $h;?>-tab">
                 <div class="row">
@@ -123,8 +98,7 @@ unset($_SESSION['subcode']);
                             $std=$row['standard'];
                             $div=$row['divsion'];?>
                             <?php
-                            $query="SELECT prn FROM $row[subjname] ";
-                            $sql_run=mysqli_query($connection,$query);
+                            $sql_run=select("prn",$row['subjname'],"");
                             $row=mysqli_num_rows($sql_run);
                             echo $row;
                             echo " <i class='fas fa-users'></i>";
@@ -134,6 +108,19 @@ unset($_SESSION['subcode']);
                       </div>
                     </div><br>
                     <?php 
+                  }
+                  if (empty(mysqli_num_rows($result))) {
+                    ?>
+                    <div class="col-sm-6 col-md-3">
+                      <div class="card-body">
+                        <button class="btn btn-block btn-danger" type="submit" name="submit1">
+                          <?php 
+                          echo " <i class='far fa-frown-open'></i><br>";
+                          echo "No Subjects";?>
+                        </button>
+                      </div>
+                    </div>
+                    <?php
                   } ?>                                    
                 </div>
               </div>

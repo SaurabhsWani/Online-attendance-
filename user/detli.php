@@ -1,18 +1,14 @@
 <?php
 include('header.php');
 include('navbar.php');
+title("Detaintion List");
 $col=$_SESSION['sub'];
 $sid=$_SESSION['subcode'];
 if($_SESSION['sub']!=Null)
 {
 	$_SESSION['sub']=$col;
 	$id=$_SESSION['bid'];
-	$per=$_SESSION['perdet'];
-// $sql = "SELECT * FROM subject ";
-// $result =mysqli_query($connectionn,$sql);
-// while($row = mysqli_fetch_assoc($result)) {
-// 	echo "<p>\n</p>".$row['subjname'];
-// } 		
+	$per=$_SESSION['perdet'];	
 	$sql="SHOW COLUMNS FROM $col";
 	$res=mysqli_query($connection,$sql);
 	$i=1;
@@ -21,12 +17,7 @@ if($_SESSION['sub']!=Null)
 		$x[$i]=$row['Field'];
 		$i+=1;
 	}
-// for($y=1;$y<$i;$y++)
-// {
-// 	echo $x[$y]."<br>";
-// }
-	$query="SELECT prn,percnt FROM $col";
-	$sql=mysqli_query($connection,$query);
+  $sql=select("prn,percnt",$col,"");
 	?>
 
 	<div class="page-inner ">
@@ -52,9 +43,6 @@ if($_SESSION['sub']!=Null)
       			echo "<thead><tr>";
       			for($y=2;$y<4;$y++){echo "<th>".$x[$y]."</th>";}
       				echo"<th>DETAINTION STATUS</th></tr></thead>";
-							// echo "<tfoot><tr>";
-							// for($y=1;$y<$i;$y++){echo "<th>".$x[$y]."</th>";}
-							// 	echo"</tr></tfoot>
       			echo "<tbody>";
       			while ($row=mysqli_fetch_assoc($sql)) 
       			{  	

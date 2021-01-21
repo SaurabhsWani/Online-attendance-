@@ -1,5 +1,6 @@
 <?php
 include('dbconfig.php');
+include('fun.php');
 $q=$_POST['q'];
 // for adding Faculty start
 if (isset($_POST['add'])) 
@@ -10,8 +11,7 @@ if (isset($_POST['add']))
 		$flag=0;
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM sent WHERE bid=$sid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","sent","WHERE bid=$sid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$sid) 
@@ -38,8 +38,8 @@ if (isset($_POST['add']))
 				{        
 					array_push($b,$aid);
 					$cp= serialize($b);           
-					$sql="UPDATE sent SET send='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					
+					if (update("sent","send","'$cp'","WHERE bid='$m'")) 
 					{
 						$flag=1;
 					}
@@ -47,8 +47,7 @@ if (isset($_POST['add']))
 			}
 		}//to add in my sent array end
 		//to add in other's recive array
-		$queryy="SELECT * FROM recieve WHERE bid=$aid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","recieve","WHERE bid=$aid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$aid) 
@@ -74,9 +73,8 @@ if (isset($_POST['add']))
 				if ($l==0) 
 				{        
 					array_push($bb,$sid);
-					$cp= serialize($bb);           
-					$sql="UPDATE recieve SET rec='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					$cp= serialize($bb);
+					if (update("recieve","rec","'$cp'","WHERE bid='$m'")) 
 					{
 						if ($flag==1) 
 						{
@@ -99,8 +97,7 @@ if (isset($_POST['can']))
 		$flag=0;
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM sent WHERE bid=$sid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","sent","WHERE bid=$sid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$sid) 
@@ -129,8 +126,7 @@ if (isset($_POST['can']))
 					unset($b[$aid]);
 					$cp1=array_values($b);
 					$cp= serialize($cp1);           
-					$sql="UPDATE sent SET send='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					if (update("sent","send","'$cp'","WHERE bid='$m'")) 
 					{
 						$flag=1;
 					}
@@ -141,8 +137,7 @@ if (isset($_POST['can']))
 		//to remove in other's recive array
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM recieve WHERE bid=$aid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","recieve","WHERE bid=$aid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$aid) 
@@ -171,8 +166,7 @@ if (isset($_POST['can']))
 					unset($bb[$siid]);
 					$cp1=array_values($bb);
 					$cp= serialize($cp1);           
-					$sql="UPDATE recieve SET rec='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					if (update("recieve","rec","'$cp'","WHERE bid='$m'")) 
 					{
 						if ($flag==1) 
 						{
@@ -195,8 +189,7 @@ if (isset($_POST['rej']))
 		$flag=0;
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM sent WHERE bid=$aid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","sent","WHERE bid=$aid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$aid) 
@@ -225,8 +218,7 @@ if (isset($_POST['rej']))
 					unset($b[$sid]);
 					$cp1=array_values($b);
 					$cp= serialize($cp1);           
-					$sql="UPDATE sent SET send='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					if (update("sent","send","'$cp'","WHERE bid='$m'")) 
 					{
 						$flag=1;
 					}
@@ -237,8 +229,7 @@ if (isset($_POST['rej']))
 		//to remove in my recieve array
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM recieve WHERE bid=$sid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","recieve","WHERE bid=$sid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$sid) 
@@ -266,9 +257,8 @@ if (isset($_POST['rej']))
 					// array_push($bb,$sid);
 					unset($bb[$aiid]);
 					$cp1=array_values($bb);
-					$cp= serialize($cp1);           
-					$sql="UPDATE recieve SET rec='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					$cp= serialize($cp1);       
+					if (update("recieve","rec","'$cp'","WHERE bid='$m'")) 
 					{
 						if ($flag==1) 
 						{
@@ -298,8 +288,7 @@ if (isset($_POST['accpt']))
 		$flag=0;
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM sent WHERE bid=$aid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","sent","WHERE bid=$aid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$aid) 
@@ -328,8 +317,7 @@ if (isset($_POST['accpt']))
 					unset($b[$sid]);
 					$cp1=array_values($b);
 					$cp= serialize($cp1);           
-					$sql="UPDATE sent SET send='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					if (update("sent","send","'$cp'","WHERE bid='$m'")) 
 					{
 						$flag=1;
 					}
@@ -340,8 +328,7 @@ if (isset($_POST['accpt']))
 		//to remove in my recieve array
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM recieve WHERE bid=$sid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","recieve","WHERE bid=$sid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['bid']==$sid) 
@@ -369,9 +356,8 @@ if (isset($_POST['accpt']))
 					// array_push($bb,$sid);
 					unset($bb[$aiid]);
 					$cp1=array_values($bb);
-					$cp= serialize($cp1);           
-					$sql="UPDATE recieve SET rec='$cp' WHERE bid=$m";
-					if ($connection->query($sql)) 
+					$cp= serialize($cp1);       
+					if (update("recieve","rec","'$cp'","WHERE bid='$m'")) 
 					{
 						if ($flag==1) 
 						{
@@ -388,8 +374,7 @@ if (isset($_POST['accpt']))
 		//to add in my friends
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM connxtion WHERE ntid=$sid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","connxtion","WHERE ntid=$sid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['ntid']==$sid) 
@@ -415,9 +400,8 @@ if (isset($_POST['accpt']))
 				if ($l==0) 
 				{        
 					array_push($b,$aid);
-					$cp= serialize($b);           
-					$sql="UPDATE connxtion SET tid='$cp' WHERE ntid=$m";
-					if ($connection->query($sql)) 
+					$cp= serialize($b);  
+					if (update("connxtion","tid","'$cp'","WHERE ntid='$m'")) 
 					{
 						if($flag==1)
 							{
@@ -433,8 +417,7 @@ if (isset($_POST['accpt']))
 		}
 		//to add in my friends end
 		//to add in other's friends
-		$queryy="SELECT * FROM connxtion WHERE ntid=$aid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","connxtion","WHERE ntid=$aid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['ntid']==$aid) 
@@ -462,7 +445,7 @@ if (isset($_POST['accpt']))
 					array_push($bb,$sid);
 					$cp= serialize($bb);           
 					$sql="UPDATE connxtion SET tid='$cp' WHERE ntid=$m";
-					if ($connection->query($sql)) 
+					if (update("connxtion","tid","'$cp'","WHERE ntid='$m'")) 
 					{
 						if ($flag==1) 
 						{
@@ -491,8 +474,7 @@ if (isset($_POST['unf']))
 		$flag=0;
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM connxtion WHERE ntid=$sid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","connxtion","WHERE ntid=$sid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['ntid']==$sid) 
@@ -520,9 +502,8 @@ if (isset($_POST['unf']))
 				{   
 					unset($b[$aid]);
 					$cp1=array_values($b);
-					$cp= serialize($cp1);            
-					$sql="UPDATE connxtion SET tid='$cp' WHERE ntid=$m";
-					if ($connection->query($sql)) 
+					$cp= serialize($cp1);          
+					if (update("connxtion","tid","'$cp'","WHERE ntid='$m'")) 
 					{
 						$flag=1;
 					}
@@ -533,8 +514,7 @@ if (isset($_POST['unf']))
 		//to add in other's friends
 		$aid=$_POST['acptrid'];
 		$sid=$_POST['sendrid'];
-		$queryy="SELECT * FROM connxtion WHERE ntid=$aid";
-		$resultt=mysqli_query($connection,$queryy);
+		$resultt=select("*","connxtion","WHERE ntid=$aid");
 		foreach($resultt as $roww ) 
 		{
 			if ($roww['ntid']==$aid) 
@@ -563,9 +543,8 @@ if (isset($_POST['unf']))
 					
 					unset($bb[$sid]);
 					$cp1=array_values($bb);
-					$cp= serialize($cp1);             
-					$sql="UPDATE connxtion SET tid='$cp' WHERE ntid=$m";
-					if ($connection->query($sql)) 
+					$cp= serialize($cp1);           
+					if (update("connxtion","tid","'$cp'","WHERE ntid='$m'")) 
 					{
 						if ($flag==1) 
 						{

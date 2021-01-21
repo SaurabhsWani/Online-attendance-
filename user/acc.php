@@ -2,8 +2,7 @@
 // for the accepted request
 function is_friend($sn,$mid)
 {
- $sql="SELECT * FROM connxtion WHERE ntid=$sn";
- $query=mysqli_query($GLOBALS['connection'],$sql);
+ $query=select("*","connxtion","WHERE ntid=$sn");
  foreach($query as $row ) 
  {
   $x=$row['tid'];
@@ -18,8 +17,7 @@ for ($i=0; $i <$y ; $i++)
 for ($a=0; $a <$y ; $a++) 
 {
   $hm=$b[$a];
-  $accquery="SELECT * FROM b_person WHERE bid=$hm";            
-  $accresult =mysqli_query($GLOBALS['connection'],$accquery);
+  $accresult=select("*","b_person","WHERE bid=$hm");
   while($acc = mysqli_fetch_assoc($accresult)) 
   {
     if($acc['bid']==$mid)
@@ -33,8 +31,7 @@ for ($a=0; $a <$y ; $a++)
 // for the sent request
 function is_req_send($sn,$mid)
 {
-  $sql="SELECT * FROM sent WHERE bid=$sn";
-  $query=mysqli_query($GLOBALS['connection'],$sql);
+  $query=select("*","sent","WHERE bid=$sn");
   foreach($query as $row ) 
   {
     $x=$row['send'];
@@ -49,8 +46,7 @@ function is_req_send($sn,$mid)
   for ($a=0; $a <$y ; $a++) 
   {
     $hm=$b[$a];
-    $accquery="SELECT * FROM b_person WHERE bid=$hm";            
-    $accresult =mysqli_query($GLOBALS['connection'],$accquery);
+    $accresult=select("*","b_person","WHERE bid=$hm");
     while($acc = mysqli_fetch_assoc($accresult)) 
     {
       if($acc['bid']==$mid)
@@ -64,8 +60,7 @@ function is_req_send($sn,$mid)
 // for the rec request
 function is_req_came($sn,$mid)
 {
-  $sql="SELECT * FROM recieve WHERE bid=$sn";
-  $query=mysqli_query($GLOBALS['connection'],$sql);
+  $query=select("*","recieve","WHERE bid=$sn");
   foreach($query as $row ) 
   {
     $x=$row['rec'];
@@ -80,8 +75,7 @@ function is_req_came($sn,$mid)
   for ($a=0; $a <$y ; $a++) 
   {
     $hm=$b[$a];
-    $accquery="SELECT * FROM b_person WHERE bid=$hm";            
-    $accresult =mysqli_query($GLOBALS['connection'],$accquery);
+    $accresult=select("*","b_person","WHERE bid=$hm");
     while($acc = mysqli_fetch_assoc($accresult)) 
     {
       if($acc['bid']==$mid)

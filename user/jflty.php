@@ -1,66 +1,14 @@
 <?php
 include('header.php');
 include('navbar.php');
+title('Friends');
 unset($_SESSION['sub']);
 unset($_SESSION['subcode']);
 $id=$_SESSION['bid'];
 ?>
 <div class="page-inner ">
-  <div class="row ">   
-    <div class="col-md-12">
-      <div class="card bg-info-gradient">
-        <div class="card-header bubble-shadow">
-          <h4 class="card-title" style="color: white">Requests</h4>
-        </div>
-        <?php
-        $aid=$_SESSION['bid'];
-        $queryy="SELECT * FROM recieve WHERE bid=$aid";
-        $resultt=mysqli_query($connection,$queryy);
-        foreach($resultt as $roww ) 
-        {
-          $arr=$roww['rec'];
-          $ucp= unserialize($arr);
-          $b = array();
-          $y=count($ucp);
-        }
-        for ($i=0; $i <$y ; $i++) 
-        { 
-          $b[$i]=$ucp[$i];
-        }
-        if($y>0)
-          {
-          echo "<br><ul>";
-
-        for ($i=0; $i <$y ; $i++) 
-        { 
-          $hm=$b[$i];
-          $query="SELECT * FROM b_person WHERE bid=$hm";
-          $sqll=mysqli_query($connection,$query);
-          foreach($sqll as $rowm ) 
-          {
-             
-              echo "<form action='req.php' method='POST' style='padding:0px;'><h5 style='color: white;padding:0px;'><img class=' rounded-circle' width=50px height=50px src='../admin/image/".$rowm['image']."'> ".$rowm['Name'];
-              ?>                               
-                <input type='hidden' name='q' value='xyz'/> 
-                <input type='hidden' name='acptrid' value='<?php echo $hm;?>'>
-                <input type='hidden' name='sendrid' value='<?php echo $aid;?>'>     
-                <button class='btn btn-icon btn-round btn-xs' type='submit' name='accpt' title="Accept Request">
-                <i class='fas fa-user-plus text-info'></i>
-                </button>
-                <button class='btn btn-icon btn-round btn-xs' type='submit' name='rej' title="Reject Request">
-                <i class='fas fa-user-times text-danger'></i>
-                </button>
-
-              <?php 
-              echo "</h5></form>";
-          }
-        }
-          echo "</ul>";
-        }
-        ?>
-      </div>
-    </div>      
-    <div class="col-md-12">
+  <div class="row ">        
+    <div class="col-md-6">
       <div class="card ">
         <div class="card-header bubble-shadow card-dark bg-primary-gradient">                  
           <?php 
@@ -70,8 +18,7 @@ $id=$_SESSION['bid'];
         <div class="card-body">
           <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
            <?php 
-           $query="SELECT * FROM connxtion WHERE ntid=$bd";
-           $sql=mysqli_query($connection,$query);
+           $sql=select("*","connxtion","WHERE ntid=$bd");
            foreach($sql as $row ) 
            {
             $x=$row['tid'];
@@ -85,42 +32,41 @@ $id=$_SESSION['bid'];
           }
           if($y>0)
           {
-          for ($i=0; $i <$y ; $i++) 
-          { 
+            for ($i=0; $i <$y ; $i++) 
+            { 
 
-            $h="home".$i;
-            if ($i==0) 
-            {
-              $o="active"; 
-              $t="true";             
-            }
-            else
-            {
-              $o="";
-              $t="false";
-            }
-            $hm=$b[$i];
-            $query="SELECT * FROM b_person WHERE bid=$hm";
-            $sqll=mysqli_query($connection,$query);
-            foreach($sqll as $rowm ) 
-            {
-              ?>
-              <li class="nav-item">
-                <a class="nav-link <?php echo $o;?>" id="pills-<?php echo $h;?>-tab" data-toggle="pill" href="#pills-<?php echo $h;?>" role="tab" aria-controls="pills-<?php echo $h;?>" aria-selected="<?php echo $t;?>"><?php 
-                echo "<i class='fas fa-user'></i> ".$rowm['Name']; ?></a>
-              </li>
-              <?php
+              $h="home".$i;
+              if ($i==0) 
+              {
+                $o="active"; 
+                $t="true";             
+              }
+              else
+              {
+                $o="";
+                $t="false";
+              }
+              $hm=$b[$i];
+              $sqll=select("*","b_person","WHERE bid=$hm");
+              foreach($sqll as $rowm ) 
+              {
+                ?>
+                <li class="nav-item">
+                  <a class="nav-link <?php echo $o;?>" id="pills-<?php echo $h;?>-tab" data-toggle="pill" href="#pills-<?php echo $h;?>" role="tab" aria-controls="pills-<?php echo $h;?>" aria-selected="<?php echo $t;?>"><?php 
+                  echo "<i class='fas fa-user'></i> ".$rowm['Name']; ?></a>
+                </li>
+                <?php
+              }
             }
           }
-        }
           ?>            
         </ul>
-          <!-- Subjects from selected teacher -->
-          <?php 
-          $y=count($b);
-          if($y>0)
-          {
-            echo "<div class='tab-content mt-2 mb-2' id='pills-tabContent'>";
+        <!-- Subjects from selected teacher -->
+        <?php 
+        $y=count($b);
+        if($y>0)
+        {
+          echo "<div class='tab-content mt-2 mb-2' id='pills-tabContent'>";
           for ($z=0; $z <$y ; $z++) 
           { 
             $h="home".$z;
@@ -133,8 +79,7 @@ $id=$_SESSION['bid'];
               $o="";
             }
             $k=$b[$z];
-            $sql="SELECT * FROM b_person WHERE bid=$k";
-            $result =mysqli_query($connection,$sql);
+            $result=select("*","b_person","WHERE bid=$k");
             ?>
             <div class="tab-pane fade <?php echo $o;?>" id="pills-<?php echo $h;?>" role="tabpanel" aria-labelledby="pills-<?php echo $h;?>-tab">
               <div class="row">
@@ -177,8 +122,7 @@ $id=$_SESSION['bid'];
                         </div>
                         <div class="col">
                           <?php 
-                          $queryy="SELECT * FROM subject WHERE id=$k ";
-                          $sql_runn=mysqli_query($connection,$queryy);
+                          $sql_runn=select("*","subject","WHERE id=$k");
                           $subj=mysqli_num_rows($sql_runn);
                           ?>
                           <div class="number"><?php echo $subj;?></div>
@@ -186,8 +130,7 @@ $id=$_SESSION['bid'];
                         </div>
                         <div class="col">
                           <?php 
-                          $queryy="SELECT * FROM connxtion WHERE ntid=$k ";
-                          $sql_runn=mysqli_query($connection,$queryy);
+                          $sql_runn=select("*","connxtion","WHERE ntid=$k");
                           $xx=$yy=0;
                           foreach($sql_runn as $roww ) 
                           {
@@ -223,10 +166,61 @@ $id=$_SESSION['bid'];
               </div>
             </div>
           <?php } echo "</div>";} ?> 
+        </div>
+      </div>  
+    </div> 
+    <div class="col-md-6">
+      <div class="card bg-info-gradient">
+        <div class="card-header bubble-shadow">
+          <h4 class="card-title" style="color: white">Requests</h4>
+        </div>
+        <?php
+        $aid=$_SESSION['bid'];
+        $resultt=select("*","recieve","WHERE bid=$aid");
+        foreach($resultt as $roww ) 
+        {
+          $arr=$roww['rec'];
+          $ucp= unserialize($arr);
+          $b = array();
+          $y=count($ucp);
+        }
+        for ($i=0; $i <$y ; $i++) 
+        { 
+          $b[$i]=$ucp[$i];
+        }
+        if($y>0)
+        {
+          echo "<br><ul>";
+
+          for ($i=0; $i <$y ; $i++) 
+          { 
+            $hm=$b[$i];
+            $sqll=select("*","b_person","WHERE bid=$hm");
+            foreach($sqll as $rowm ) 
+            {
+
+              echo "<form action='req.php' method='POST' style='padding:0px;'><h5 style='color: white;padding:0px;'><img class=' rounded-circle' width=50px height=50px src='../admin/image/".$rowm['image']."'> ".$rowm['Name'];
+              ?>                               
+              <input type='hidden' name='q' value='xyz'/> 
+              <input type='hidden' name='acptrid' value='<?php echo $hm;?>'>
+              <input type='hidden' name='sendrid' value='<?php echo $aid;?>'>     
+              <button class='btn btn-icon btn-round btn-xs' type='submit' name='accpt' title="Accept Request">
+                <i class='fas fa-user-plus text-info'></i>
+              </button>
+              <button class='btn btn-icon btn-round btn-xs' type='submit' name='rej' title="Reject Request">
+                <i class='fas fa-user-times text-danger'></i>
+              </button>
+
+              <?php 
+              echo "</h5></form>";
+            }
+          }
+          echo "</ul>";
+        }
+        ?>
       </div>
-    </div>  
-  </div>   
-</div>
+    </div>   
+  </div>
 </div> 
 </div>
 </div> 

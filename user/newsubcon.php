@@ -1,9 +1,9 @@
 <?php
 include('security.php');
+include('fun.php');
 $st=$_POST['sname'].$_SESSION['bid'];
 $id=$_SESSION['bid'];
-$sql = "SELECT * FROM subject WHERE id=$id";
-$result =mysqli_query($connection,$sql);
+$result=select("*","subject","WHERE id=$id");
 $flag=0;
 while($row = mysqli_fetch_assoc($result)) 
 {
@@ -63,15 +63,13 @@ if($flag==0)
 				mysqli_query($connection,$sql); 
 			}
 		}
-		$_SESSION['Success']="New Subject Created";
-		echo '<script>window.location="Subjects.php"</script>';
+		poutput("New Subject Created","Subjects");
 	}
 }
 else
 {
-$_SESSION['Status']="New Subject Not Created";
 echo "<script>alert('Please use different subject name or use postfix to subject');</script>";
-echo '<script>window.location="Subjects.php"</script>';
+noutput("New Subject Not Created","Subjects");
 }
 // prn insertion complete
 mysqli_close($connection);

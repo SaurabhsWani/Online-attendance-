@@ -35,131 +35,104 @@
 
 <!-- Atlantis JS -->
 <script src="../assets/js/atlantis.min.js"></script>
-
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-	<!-- <script src="../assets/js/setting-demo.js"></script>
-		<script src="../assets/js/demo.js"></script> -->
-	<!-- <script>
-		$(document).ready(function() {
-			var placementFrom = "bottom";
-			var placementAlign = "right";
-			var state = "secondary";
-			var content = {};
-			if (placementFrom !=null) {
-			content.message = 'You Have New Request';
-			content.title = 'Notification';
-			content.icon = 'fa fa-bell';
-			content.url = 'main.php';
-
-			$.notify(content,{
-				type: state,
-				placement: {
-					from: placementFrom,
-					align: placementAlign
-				},
-				time: 1000,
-				delay: 0,
-			});}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#basic-datatables').DataTable({
 		});
-	</script> -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
-			});
 
-			$('#multi-filter-select').DataTable( {
-				"pageLength": 5,
-				initComplete: function () {
-					this.api().columns().every( function () {
-						var column = this;
-						var select = $('<select class="form-control"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-								);
+		$('#multi-filter-select').DataTable( {
+			"pageLength": 5,
+			initComplete: function () {
+				this.api().columns().every( function () {
+					var column = this;
+					var select = $('<select class="form-control"><option value=""></option></select>')
+					.appendTo( $(column.footer()).empty() )
+					.on( 'change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+							$(this).val()
+							);
 
-							column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-						} );
-
-						column.data().unique().sort().each( function ( d, j ) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
+						column
+						.search( val ? '^'+val+'$' : '', true, false )
+						.draw();
 					} );
-				}
-			});
+
+					column.data().unique().sort().each( function ( d, j ) {
+						select.append( '<option value="'+d+'">'+d+'</option>' )
+					} );
+				} );
+			}
 		});
-	</script>	
-	<script type="text/javascript">
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+	});
+</script>	
+<script type="text/javascript">
+	Circles.create({
+		id:'circles-1',
+		radius:45,
+		value:60,
+		maxValue:100,
+		width:7,
+		text: 5,
+		colors:['#f1f1f1', '#FF9E27'],
+		duration:400,
+		wrpClass:'circles-wrp',
+		textClass:'circles-text',
+		styleWrapper:true,
+		styleText:true
+	})
 
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+	Circles.create({
+		id:'circles-2',
+		radius:45,
+		value:70,
+		maxValue:100,
+		width:7,
+		text: 36,
+		colors:['#f1f1f1', '#2BB930'],
+		duration:400,
+		wrpClass:'circles-wrp',
+		textClass:'circles-text',
+		styleWrapper:true,
+		styleText:true
+	})
 
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+	Circles.create({
+		id:'circles-3',
+		radius:45,
+		value:40,
+		maxValue:100,
+		width:7,
+		text: 12,
+		colors:['#f1f1f1', '#F25961'],
+		duration:400,
+		wrpClass:'circles-wrp',
+		textClass:'circles-text',
+		styleWrapper:true,
+		styleText:true
+	})
 
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
+	var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
+	var mytotalIncomeChart = new Chart(totalIncomeChart, {
+		type: 'bar',
+		data: {
+			labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
+			datasets : [{
+				label: "Total Income",
+				backgroundColor: '#ff9e27',
+				borderColor: 'rgb(23, 125, 255)',
+				data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
+			}],
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				display: false,
 			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
+			scales: {
+				yAxes: [{
+					ticks: {
 							display: false //this will remove only the label
 						},
 						gridLines : {
@@ -177,21 +150,21 @@
 			}
 		});
 
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
-		
-		function p()
+	$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+		type: 'line',
+		height: '70',
+		width: '100%',
+		lineWidth: '2',
+		lineColor: '#ffa534',
+		fillColor: 'rgba(255, 165, 52, .14)'
+	});
+
+	function p()
+	{
+
+		var c=document.getElementById("c");
+		if (c.checked) 
 		{
-			
-			var c=document.getElementById("c");
-			if (c.checked) 
-			{
                   //alert("All Students Are Present");
                   for (let i = 1; i <= <?php echo $_SESSION['cont'];?> ; i++) 
                   {
@@ -208,6 +181,34 @@
                }
                
            }
+       </script>
+       <script>
+       	function notification()
+       	{
+       		var ntf=<?php echo $_SESSION['ntf']; ?>;
+       		if (ntf!=0) 
+       		{
+       			var placementFrom = "bottom";
+       			var placementAlign = "right";
+       			var state = "info";
+       			var style = "withicon";
+       			var content = {};
+       			content.message = 'New Friend Request ';
+       			content.title = 'Notification';
+       			content.icon = 'fa fa-bell';
+       			content.url = 'jflty.php';
+       			content.target = '_blank';
+       			$.notify(content,{
+       				type: state,
+       				placement: {
+       					from: placementFrom,
+       					align: placementAlign
+       				},
+       				time: 1000,
+       				delay: 0,
+       			});
+       		}
+       	}
        </script>
    </body>
    </html>
